@@ -26,10 +26,10 @@
               "translate(" + margin.left + "," + margin.top + ")");
     
     //Read the data
-    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/2_TwoNum.csv", function(data) {
+    d3.csv("data.csv", function(data) {
       // Add X axis
       var x = d3.scaleLinear()
-        .domain([0, 4000])
+        .domain([0, 80])
         .range([ 0, width ]);
       svg.append("g")
         .attr("transform", "translate(0," + height + ")")
@@ -37,7 +37,7 @@
     
       // Add Y axis
       var y = d3.scaleLinear()
-        .domain([0, 500000])
+        .domain([0, 80])
         .range([ height, 0]);
       svg.append("g")
         .call(d3.axisLeft(y));
@@ -48,8 +48,8 @@
         .data(data)
         .enter()
         .append("circle")
-          .attr("cx", function (d) { return x(d.GrLivArea); } )
-          .attr("cy", function (d) { return y(d.SalePrice); } )
+          .attr("cx", function (d) { return x(d.public_repos); } )
+          .attr("cy", function (d) { return y(d.contribs); } )
           .attr("r", 1.5)
           .style("fill", "#69b3a2")
     

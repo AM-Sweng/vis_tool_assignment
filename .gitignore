@@ -3,3 +3,4 @@
 
 # Ignore data files
 *.json
+*.csv
