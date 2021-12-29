@@ -1,1 +1,0 @@
-python3 ./initialscript.py $1 $2
