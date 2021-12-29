@@ -1,0 +1,8 @@
+# Ignore IDE / Editor related settings and files
+/.vscode
+
+# Ignore data files
+*.csv
+
+# Ignore Scripts
+*.sh
