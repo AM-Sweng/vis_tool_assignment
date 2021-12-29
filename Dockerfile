@@ -15,5 +15,5 @@ FROM base-compile-image as compile-image
 
 COPY . /visapp
 
-ENTRYPOINT ["python", "/visapp/initialscript.py"]
-CMD [""]
+ENTRYPOINT ["python"]
+CMD ["--help"]
