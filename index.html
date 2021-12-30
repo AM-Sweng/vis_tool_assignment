@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 
 <!-- Scatterplot code, found at https://www.d3-graph-gallery.com/graph/scatter_basic.html -->
+<!-- Axis label code found at https://stackoverflow.com/questions/11189284/d3-axis-labeling -->
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
@@ -39,6 +40,13 @@
       svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
+
+      svg.append("text")
+        .attr("class", "x label")
+        .attr("text-anchor", "end")
+        .attr("x", width)
+        .attr("y", height -6)
+        .text("Public Repositories");
     
       // Add Y axis
       var y = d3.scaleLinear()
@@ -46,6 +54,14 @@
         .range([ height, 0]);
       svg.append("g")
         .call(d3.axisLeft(y));
+
+      svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("y", 6)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("Contributions");
     
       // Add dots
       svg.append('g')
