@@ -46,7 +46,7 @@
         .attr("text-anchor", "end")
         .attr("x", width)
         .attr("y", height -6)
-        .text("Public Repositories");
+        .text("Number of Repositories");
     
       // Add Y axis
       var y = d3.scaleLinear()
@@ -61,7 +61,7 @@
         .attr("y", 6)
         .attr("dy", ".75em")
         .attr("transform", "rotate(-90)")
-        .text("Contributions");
+        .text("Commits Per Day");
     
       // Add dots
       svg.append('g')
@@ -69,8 +69,8 @@
         .data(data)
         .enter()
         .append("circle")
-          .attr("cx", function (d) { return x(d.public_repos); } )
-          .attr("cy", function (d) { return y(d.contribs); } )
+          .attr("cx", function (d) { return x(d.repo_count); } )
+          .attr("cy", function (d) { return y(d.commits_a_day); } )
           .attr("r", 1.5)
           .style("fill", "#69b3a2")
     
