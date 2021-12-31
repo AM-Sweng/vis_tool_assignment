@@ -30,8 +30,8 @@
     d3.csv("data.csv", function(data) {
 
       // Find the max X and Y values
-      var maxX = d3.max(data, function(d) { return +d.public_repos; });
-      var maxY = d3.max(data, function(d) { return +d.contribs; });
+      var maxX = d3.max(data, function(d) { return +d.repo_count; });
+      var maxY = d3.max(data, function(d) { return +d.commits_a_day; });
 
       // Add X axis
       var x = d3.scaleLinear()
