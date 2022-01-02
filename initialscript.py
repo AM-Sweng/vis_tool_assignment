@@ -17,16 +17,13 @@ try:
     if repo_count > 0:
         commit_count = 0
         for rp in repos:
-            used_within_last_3_months = False # Assume this repo was not commited to by the user in the last 3 months
-            commits = rp.get_commits(author = user)
             try:
-                for cm in commits:
-                    if cm.commit.author.date >= datetime.today() - timedelta(days=90): # Check that the commit was within the last 3 months (roughly 90 days)
-                        commit_count = commit_count + 1
-                        used_within_last_3_months = True
-            except GithubException as e:
-                print(e)
-            if not used_within_last_3_months:
+                commits = rp.get_commits(author = user, since = datetime.today() - timedelta(days=90)) # Get all commits within the last 3 months (roughly 90 days)
+                if commits.totalCount > 0:
+                    commit_count = commit_count + commits.totalCount
+                else:
+                    repo_count = repo_count - 1
+            except GithubException: # If an exception arises from this repo, dont count it or the commits from it
                 repo_count = repo_count - 1
         avrg_commits_a_day = commit_count / 90
         
@@ -43,16 +40,13 @@ try:
             if repo_count > 0:
                 commit_count = 0
                 for rp in repos:
-                    used_within_last_3_months = False
-                    commits = rp.get_commits(author = fl)
                     try:
-                        for cm in commits:
-                            if cm.commit.author.date >= datetime.today() - timedelta(days=90):
-                                commit_count = commit_count + 1
-                                used_within_last_3_months = True
-                    except GithubException as e:
-                        print(e)
-                    if not used_within_last_3_months:
+                        commits = rp.get_commits(author = fl, since = datetime.today() - timedelta(days=90))
+                        if commits.totalCount > 0:
+                            commit_count = commit_count + commits.totalCount
+                        else:
+                            repo_count = repo_count - 1
+                    except GithubException:
                         repo_count = repo_count - 1
                 avrg_commits_a_day = commit_count / 90
             file.write(str(repo_count) + "," + str(avrg_commits_a_day) + "\n")
