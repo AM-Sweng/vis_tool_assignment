@@ -31,7 +31,8 @@ try:
     # Write the results to a csv file and find the same data on the users followers
     with open("data.csv", "w") as file:
         file.write("repo_count,commits_a_day\n")
-        file.write(str(repo_count) + "," + str(avrg_commits_a_day) + "\n")
+        if repo_count > 0: # Avoid writing data on users who have not commited to their repos in the specified time (last 3 months)
+            file.write(str(repo_count) + "," + str(avrg_commits_a_day) + "\n")
         followers = user.get_followers()
         for fl in followers:
             repos = fl.get_repos()
@@ -49,7 +50,8 @@ try:
                     except GithubException:
                         repo_count = repo_count - 1
                 avrg_commits_a_day = commit_count / 90
-            file.write(str(repo_count) + "," + str(avrg_commits_a_day) + "\n")
+                if repo_count > 0: # Avoid writing data on users who have not commited to their repos in the specified time (last 3 months)
+                    file.write(str(repo_count) + "," + str(avrg_commits_a_day) + "\n")
     
     print("Script Completed")
 
