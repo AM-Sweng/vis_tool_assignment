@@ -17,13 +17,11 @@ if repo_count != 0:
     commit_count = 0
     for rp in repos:
         used_within_last_3_months = False # Assume this repo was not commited to by the user in the last 3 months
-        commits = rp.get_commits()
+        commits = rp.get_commits(author = user)
         for cm in commits:
-            if cm.author != None:
-                if cm.author.login == user.login:
-                    if cm.commit.author.date >= datetime.today() - timedelta(days=90): # Check that the commit was within the last 3 months (roughly 90 days)
-                        commit_count = commit_count + 1
-                        used_within_last_3_months = True
+            if cm.commit.author.date >= datetime.today() - timedelta(days=90): # Check that the commit was within the last 3 months (roughly 90 days)
+                commit_count = commit_count + 1
+                used_within_last_3_months = True
         if not used_within_last_3_months:
             repo_count = repo_count - 1
     avrg_commits_a_day = commit_count / 90
@@ -42,13 +40,11 @@ with open("data.csv", "w") as file:
             commit_count = 0
             for rp in repos:
                 used_within_last_3_months = False
-                commits = rp.get_commits()
+                commits = rp.get_commits(author = fl)
                 for cm in commits:
-                    if cm.author != None:
-                        if cm.author.login == fl.login:
-                            if cm.commit.author.date >= datetime.today() - timedelta(days=90):
-                                commit_count = commit_count + 1
-                                used_within_last_3_months = True
+                    if cm.commit.author.date >= datetime.today() - timedelta(days=90):
+                        commit_count = commit_count + 1
+                        used_within_last_3_months = True
                 if not used_within_last_3_months:
                     repo_count = repo_count - 1
             avrg_commits_a_day = commit_count / 90
