@@ -24,10 +24,6 @@ You will also need a Github Personal Access Token to be able to use this.
 
         $ ./docker-build.sh
 
-2. Run docker-run-gather.sh followed by two arguments: your Personal Access Token, and the username of an account to start gathering from.
+2. Run docker-run-gather.sh followed by two arguments: your Personal Access Token, and the username of an account to start gathering from. Once the data collection and processing is complete,the container will host the html page from index.html, and can be accessed through localhost using port forwarding. The docker-run.sh script uses localhost:8000 by default.
 
-        $ ./docker-run-gather.sh ACCESS_TOKEN USERNAME
-
-3. Run docker-run-serv.sh. This will display the html page from index.html, and can be accessed through localhost using port forwarding. The docker-run-serv.sh script uses localhost:8000 by default.
-
-        $ ./docker-run-serv.sh
+        $ ./docker-run.sh ACCESS_TOKEN USERNAME

@@ -15,5 +15,7 @@ FROM base-compile-image as compile-image
 
 COPY . /visapp
 
-ENTRYPOINT ["python"]
-CMD ["--help"]
+RUN chmod +x /visapp/helper-script.sh
+
+ENTRYPOINT ["./helper-script.sh"]
+CMD [""]
